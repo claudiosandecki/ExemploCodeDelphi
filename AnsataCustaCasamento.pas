@@ -3,6 +3,7 @@ unit Classes.AnsataCustaCasamento;
 interface
 
 // Estabelece um "contrato" para que as classes de custas tenham os mesmos métodos.
+// Obs: Estou colocando por estado, mas poderia também ser por ano.
 type
   ICustaCasamento = Interface
     function getResult : double;

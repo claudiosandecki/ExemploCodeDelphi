@@ -36,7 +36,7 @@ protected
     function getResult : double;
     procedure setResult ( value : double );
     procedure custaCasamento(ano: integer);
-	procedure custaCasamentoReligioso(ano: integer);
+    procedure custaCasamentoReligioso(ano: integer);
     procedure custaCasamentoForaSede(ano: integer);
 end;
 

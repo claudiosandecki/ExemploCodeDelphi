@@ -2,37 +2,41 @@ unit Classes.AnsataCustaCasamento;
 
 interface
 
+// Estabelece um "contrato" para que as classes de custas tenham os mesmos métodos.
 type
-    ICustaCasamento = Interface
-       function getResult : double;
-       procedure setResult( value: double );
-       procedure custaCasamento(ano: integer);
-	   procedure custaCasamentoReligioso(ano: integer);
-       procedure custaCasamentoForaSede(ano: integer);	   
-       property result : double read getResult write setResult;
-    end;
-
-
-TAnsataCustaCasamentoGO = class (TInterfacedObject, ICustaCasamento)
-private
-    fResult : double;
-protected
+  ICustaCasamento = Interface
     function getResult : double;
-    procedure setResult ( value : double );
-       procedure custaCasamento(ano: integer);
-	   procedure custaCasamentoReligioso(ano: integer);
-       procedure custaCasamentoForaSede(ano: integer);
+    procedure setResult( value: double );
+    procedure custaCasamento(ano: integer);
+    procedure custaCasamentoReligioso(ano: integer);
+    procedure custaCasamentoForaSede(ano: integer);
+
+    property result: double read getResult write setResult;
 end;
 
-TAnsataCustaCasamentoPR = class (TInterfacedObject, ICustaCasamento)
+
+// Classe de métodos para as custas de GO.
+TAnsataCustaCasamentoGO = class (TInterfacedObject, ICustaCasamento)
 private
-    fResult : double;
+  fResult: double;
 protected
     function getResult : double;
     procedure setResult ( value : double );
-       procedure custaCasamento(ano: integer);
-	   procedure custaCasamentoReligioso(ano: integer);
-       procedure custaCasamentoForaSede(ano: integer);
+    procedure custaCasamento(ano: integer);
+    procedure custaCasamentoReligioso(ano: integer);
+    procedure custaCasamentoForaSede(ano: integer);
+end;
+
+// Classe de métodos para as custas de GO.
+TAnsataCustaCasamentoPR = class (TInterfacedObject, ICustaCasamento)
+private
+  fResult: double;
+protected
+    function getResult : double;
+    procedure setResult ( value : double );
+    procedure custaCasamento(ano: integer);
+	procedure custaCasamentoReligioso(ano: integer);
+    procedure custaCasamentoForaSede(ano: integer);
 end;
 
 implementation
@@ -40,10 +44,12 @@ implementation
 
 {AnsataCustasGO}
 
+//Implementa os métodos para as regras de custas de GO.
 function TAnsataCustaCasamentoGO.getResult: double;
 begin
    result := Self.fResult;
 end;
+
 procedure TAnsataCustaCasamentoGO.setResult(value: double);
 begin
    self.fResult := value;
@@ -53,7 +59,7 @@ procedure TAnsataCustaCasamentoGO.custaCasamento(ano: integer);
 begin
   if ano = 2021 then setResult(self.fResult + 420);
   if ano = 2022 then setResult(self.fResult + 180);
-end; 
+end;
 
 procedure TAnsataCustaCasamentoGO.custaCasamentoReligioso(ano: integer);
 begin
@@ -70,6 +76,7 @@ end;
 
 {AnsataCustasPR}
 
+//Implementa os métodos para as regras de custas de GO.
 function TAnsataCustaCasamentoPR.getResult: double;
 begin
    result := Self.fResult;
@@ -83,7 +90,7 @@ procedure TAnsataCustaCasamentoPR.custaCasamento(ano: integer);
 begin
   if ano = 2021 then setResult(self.fResult + 380);
   if ano = 2022 then setResult(self.fResult + 430);
-end; 
+end;
 
 procedure TAnsataCustaCasamentoPR.custaCasamentoReligioso(ano: integer);
 begin
@@ -101,6 +108,7 @@ end.
 
 //==============================================================================================
 
+// Exemplo de um código em um form acessando as classes de custas.
 procedure TFormOrcamentoCasamento.btnCalcularCustaClick(Sender: TObject);
 var
   custaCasamento: ICustaCasamento;
@@ -114,7 +122,7 @@ begin
 
     // Adiciona os valores conforme os parâmetros.
     custaCasamento.custaCasamento(intToStr(editAnoCasamento.Text));
-   
+
     if checkboxCasamentoReligio.Checked then
       custaCasamento.custaCasamentoReligioso(intToStr(editAnoCasamento.Text));
 
